@@ -1,0 +1,44 @@
+{
+  "summary": "$sumary",
+  "description": "$description",
+  "additional_information": "$addinformation",
+  "project": {
+    "id": 1,
+    "name": "$projectname"
+  },
+  "category": {
+    "id": 5,
+    "name": "$category"
+  },
+  "handler": {
+    "name": "$handler"
+  },
+  "view_state": {
+    "id": 10,
+    "name": "public"
+  },
+  "priority": {
+    "name": "$priority"
+  },
+  "severity": {
+    "name": "$severity"
+  },
+  "reproducibility": {
+    "name": "always"
+  },
+  "sticky": false,
+  "custom_fields": [
+    {
+      "field": {
+        "id": 4,
+        "name": "The City"
+      },
+      "value": "Seattle"
+    }
+  ],
+  "tags": [
+    {
+      "name": "mantishub"
+    }
+  ]
+}

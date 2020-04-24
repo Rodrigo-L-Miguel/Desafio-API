@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <Folder Include="DBSteps\" />
-    <Folder Include="Jsons\" />
     <Folder Include="Queries\" />
   </ItemGroup>
 
