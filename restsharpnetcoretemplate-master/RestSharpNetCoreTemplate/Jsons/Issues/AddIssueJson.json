@@ -1,7 +1,7 @@
 {
   "summary": "$sumary",
   "description": "$description",
-  "additional_information": "$addinformation",
+  "additional_information": "More info about the issue",
   "project": {
     "id": 1,
     "name": "$projectname"
@@ -18,10 +18,10 @@
     "name": "public"
   },
   "priority": {
-    "name": "$priority"
+    "name": "normal"
   },
   "severity": {
-    "name": "$severity"
+    "name": "trivial"
   },
   "reproducibility": {
     "name": "always"

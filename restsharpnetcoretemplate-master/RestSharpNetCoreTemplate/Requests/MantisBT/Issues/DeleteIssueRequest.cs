@@ -6,10 +6,9 @@ namespace RestSharpNetCoreTemplate.Requests.MantisBT.Issues
 {
     class DeleteIssueRequest : RequestBase
     {
-        public DeleteIssueRequest(string issueId)
+        public DeleteIssueRequest(string requestService,string issueId)
         {
-            url = "https://rodrigomiguel.mantishub.io";
-            requestService = "/api/rest/issues/{issueid}}";
+            this.requestService = requestService;
             method = Method.DELETE;
             parameters.Add("issueid", issueId);
         }
