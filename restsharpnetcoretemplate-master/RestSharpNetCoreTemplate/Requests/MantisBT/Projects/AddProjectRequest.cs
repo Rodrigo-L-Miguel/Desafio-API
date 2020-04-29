@@ -8,16 +8,16 @@ namespace RestSharpNetCoreTemplate.Requests.MantisBT.Projects
 {
     class AddProjectRequest : RequestBase
     {
-        public AddProjectRequest()
+        public AddProjectRequest(string requestService)
         {
-            url = "https://rodrigomiguel.mantishub.io";
-            requestService = "/api/rest/projects/";
+            this.requestService = requestService ;
             method = Method.POST;
+            headers.Add("Authorization", JsonBuilder.ReturnParameterAppSettings("TOKEN"));
         }
 
         public void SetJsonBody(string projectName,string description)
         {
-            jsonBody = File.ReadAllText(GeneralHelpers.ReturnProjectPath() + "Jsons/Projects/AddIssueJson.json", Encoding.UTF8);
+            jsonBody = File.ReadAllText(GeneralHelpers.ReturnProjectPath() + "Jsons/Projects/AddProjectJson.json", Encoding.UTF8);
             jsonBody = jsonBody.Replace("$projectname", projectName);
             jsonBody = jsonBody.Replace("$description", description);
 

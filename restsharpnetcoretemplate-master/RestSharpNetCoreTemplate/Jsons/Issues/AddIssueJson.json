@@ -11,7 +11,7 @@
     "name": "$category"
   },
   "handler": {
-    "name": "$handler"
+    "name": "restuser"
   },
   "view_state": {
     "id": 10,
@@ -26,19 +26,5 @@
   "reproducibility": {
     "name": "always"
   },
-  "sticky": false,
-  "custom_fields": [
-    {
-      "field": {
-        "id": 4,
-        "name": "The City"
-      },
-      "value": "Seattle"
-    }
-  ],
-  "tags": [
-    {
-      "name": "mantishub"
-    }
-  ]
+  "sticky": false
 }

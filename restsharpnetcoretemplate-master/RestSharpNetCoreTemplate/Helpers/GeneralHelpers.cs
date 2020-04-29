@@ -1,17 +1,18 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading.Tasks;
+using System.Text.Encodings;
 
 namespace RestSharpNetCoreTemplate.Helpers
 {
     public class GeneralHelpers
-    {       
+    {
         public static string FormatJson(string str)
         {
             string INDENT_STRING = "    ";
@@ -122,6 +123,42 @@ namespace RestSharpNetCoreTemplate.Helpers
                 return false;
             }
         }
+        public static IEnumerable ReturnCSVData(string csvPath)
+        {
+            using (StreamReader sr = new StreamReader(csvPath, Encoding.Default, true))
+            {
+                string headerLine = sr.ReadLine();//Read csv first line
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    ArrayList result = new ArrayList();
+                    result.AddRange(line.Split(';'));
+                    yield return result;
+                }
+            }
+        }
+
+        /*public static void InsertCSVData(string csvPath, string addItem, int column)
+        {
+            using (StreamReader sr = new StreamReader(csvPath, Encoding.Default, true))
+            {
+                string headerLine = sr.ReadLine();//Read csv first line
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    ArrayList result = new ArrayList();
+                    result.AddRange(line.Split(';'));
+
+                    result[column] = addItem;
+                    line = string.Join(",", line);
+
+
+                    }
+                }
+                File.WriteAllLines(@"C:\\CSV.txt", lines);
+            }
+        }*/
+    
     }
 
     static class Extensions

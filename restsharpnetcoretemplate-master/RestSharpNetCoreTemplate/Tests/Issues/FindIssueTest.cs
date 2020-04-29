@@ -18,9 +18,9 @@ namespace RestSharpNetCoreTemplate.Tests.Issues
         {
             idTarefa = "1";
             string resultadoEsperado = "OK";
-            FindIssueByIdRequest cliente = new FindIssueByIdRequest(requestService,idTarefa);
-            IRestResponse <dynamic> request = cliente.ExecuteRequest();
-            string respondeCode = request.StatusCode.ToString();
+            FindIssueByIdRequest Solicitacao = new FindIssueByIdRequest(requestService,idTarefa);
+            IRestResponse <dynamic> Resposta = Solicitacao.ExecuteRequest();
+            string respondeCode = Resposta.StatusCode.ToString();
             Assert.IsTrue(respondeCode.Contains(resultadoEsperado));
         }
         
@@ -29,9 +29,9 @@ namespace RestSharpNetCoreTemplate.Tests.Issues
         {
             idTarefa = "200";
             string resultadoEsperado = "NotFound";
-            FindIssueByIdRequest cliente = new FindIssueByIdRequest(requestService, idTarefa);
-            IRestResponse<dynamic> request = cliente.ExecuteRequest();
-            string respondeCode = request.StatusCode.ToString();
+            FindIssueByIdRequest Solicitacao = new FindIssueByIdRequest(requestService, idTarefa);
+            IRestResponse<dynamic> Resposta = Solicitacao.ExecuteRequest();
+            string respondeCode = Resposta.StatusCode.ToString();
             Assert.IsTrue(respondeCode.Contains(resultadoEsperado));
 
         }

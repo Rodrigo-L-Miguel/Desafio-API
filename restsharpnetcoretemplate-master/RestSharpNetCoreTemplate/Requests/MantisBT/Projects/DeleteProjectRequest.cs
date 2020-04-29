@@ -1,17 +1,18 @@
 ﻿using RestSharp;
 using RestSharpNetCoreTemplate.Bases;
+using RestSharpNetCoreTemplate.Helpers;
+
 
 
 namespace RestSharpNetCoreTemplate.Requests.MantisBT.Projects
 {
     class DeleteProjectRequest : RequestBase
     {
-        public DeleteProjectRequest(string projectId)
+        public DeleteProjectRequest(string requestService)
         {
-            url = "https://rodrigomiguel.mantishub.io";
-            requestService = "/api/rest/projects/{{projectid}}";
+            this.requestService = requestService;
             method = Method.DELETE;
-            parameters.Add("projectid", projectId);
+            headers.Add("Authorization", JsonBuilder.ReturnParameterAppSettings("TOKEN"));
         }
     }
 }

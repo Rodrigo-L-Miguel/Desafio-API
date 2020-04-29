@@ -1,16 +1,17 @@
 ﻿using RestSharp;
 using RestSharpNetCoreTemplate.Bases;
+using RestSharpNetCoreTemplate.Helpers;
 
 
 namespace RestSharpNetCoreTemplate.Requests.MantisBT.Issues
 {
     class DeleteIssueRequest : RequestBase
     {
-        public DeleteIssueRequest(string requestService,string issueId)
+        public DeleteIssueRequest(string requestService)
         {
             this.requestService = requestService;
             method = Method.DELETE;
-            parameters.Add("issueid", issueId);
+            headers.Add("Authorization", JsonBuilder.ReturnParameterAppSettings("TOKEN"));
         }
 
 

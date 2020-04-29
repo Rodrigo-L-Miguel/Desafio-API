@@ -1,13 +1,17 @@
 ﻿using RestSharp;
 using RestSharpNetCoreTemplate.Bases;
+using RestSharpNetCoreTemplate.Helpers;
+
 
 namespace RestSharpNetCoreTemplate.Requests.MantisBT.Projects
 {
     class FindProjectRequest : RequestBase
     {
-        public FindProjectRequest(string projectId)
+        public FindProjectRequest(string requestService)
         {
-            url = "https://rodrigomiguel.mantishub.io";
+            this.requestService = requestService;
+            method = Method.GET;
+            headers.Add("Authorization",JsonBuilder.ReturnParameterAppSettings("TOKEN"));
         }
     }
 }
