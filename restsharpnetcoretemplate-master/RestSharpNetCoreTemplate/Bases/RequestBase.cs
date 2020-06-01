@@ -22,11 +22,12 @@ namespace RestSharpNetCoreTemplate.Bases
         protected bool httpBasicAuthenticator = false;
 
         protected bool ntlmAuthenticator = false;
-        
+
         protected IDictionary<string, string> headers = new Dictionary<string, string>()
         {
             //Dicionário de headeres deve ser iniciado com os headers comuns a todos os métodos da API
             {"Content-Type", "application/json"},
+            {"Authorization", JsonBuilder.ReturnParameterAppSettings("TOKEN") },
         };
                
         protected IDictionary<string, string> cookies = new Dictionary<string, string>()
@@ -69,5 +70,11 @@ namespace RestSharpNetCoreTemplate.Bases
             this.method = method;
         }
         #endregion
+
+        public void UpdateToken(string token)
+        {
+            headers.Remove("Authorization");
+            headers.Add("Authorization", token);
+        }
     }
 }

@@ -6,13 +6,11 @@ namespace Requests.MantisBT.Issues
 {
     class FindIssueByIdRequest : RequestBase
     {
-        public FindIssueByIdRequest(string requestService,string issueId)
+        public FindIssueByIdRequest(string issueId)
         { 
-            this.requestService = requestService;
+            requestService = "/api/rest/issues/{issueid}";
             method = Method.GET;
             parameters.Add("issueid", issueId);
-            headers.Add("Authorization", JsonBuilder.ReturnParameterAppSettings("TOKEN"));
-            
         }
     }
 }

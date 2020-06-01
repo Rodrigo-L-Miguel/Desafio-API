@@ -1,0 +1,6 @@
+﻿{
+  "project": {
+    "name": "$subprojectname"
+  },
+  "inherit_parent": true
+}

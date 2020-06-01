@@ -7,11 +7,11 @@ namespace RestSharpNetCoreTemplate.Requests.MantisBT.Projects
 {
     class FindProjectRequest : RequestBase
     {
-        public FindProjectRequest(string requestService)
+        public FindProjectRequest(string idProjeto)
         {
-            this.requestService = requestService;
+            requestService = "/api/rest/projects/{idProjeto}";
+            parameters.Add("idProjeto", idProjeto);
             method = Method.GET;
-            headers.Add("Authorization",JsonBuilder.ReturnParameterAppSettings("TOKEN"));
         }
     }
 }

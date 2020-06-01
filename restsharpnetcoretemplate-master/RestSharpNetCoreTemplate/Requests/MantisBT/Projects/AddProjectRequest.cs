@@ -8,11 +8,10 @@ namespace RestSharpNetCoreTemplate.Requests.MantisBT.Projects
 {
     class AddProjectRequest : RequestBase
     {
-        public AddProjectRequest(string requestService)
+        public AddProjectRequest()
         {
-            this.requestService = requestService ;
+            requestService = "/api/rest/projects";
             method = Method.POST;
-            headers.Add("Authorization", JsonBuilder.ReturnParameterAppSettings("TOKEN"));
         }
 
         public void SetJsonBody(string projectName,string description)

@@ -8,11 +8,11 @@ namespace RestSharpNetCoreTemplate.Requests.MantisBT.Projects
 {
     class DeleteProjectRequest : RequestBase
     {
-        public DeleteProjectRequest(string requestService)
+        public DeleteProjectRequest(string idProject)
         {
-            this.requestService = requestService;
+            requestService = "/api/rest/projects/{idproject}";
             method = Method.DELETE;
-            headers.Add("Authorization", JsonBuilder.ReturnParameterAppSettings("TOKEN"));
+            parameters.Add("idproject", idProject);
         }
     }
 }

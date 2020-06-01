@@ -7,13 +7,12 @@ namespace RestSharpNetCoreTemplate.Requests.MantisBT.Issues
 {
     class DeleteIssueRequest : RequestBase
     {
-        public DeleteIssueRequest(string requestService)
+        public DeleteIssueRequest(string idTarefa)
         {
-            this.requestService = requestService;
+            requestService = "/api/rest/issues/{idtarefa}";
             method = Method.DELETE;
-            headers.Add("Authorization", JsonBuilder.ReturnParameterAppSettings("TOKEN"));
+            parameters.Add("idtarefa", idTarefa);
         }
-
 
     }
 }

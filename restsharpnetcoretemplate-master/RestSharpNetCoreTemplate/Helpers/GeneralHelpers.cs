@@ -138,7 +138,7 @@ namespace RestSharpNetCoreTemplate.Helpers
             }
         }
 
-        /*public static void InsertCSVData(string csvPath, string addItem, int column)
+        public static void InsertCSVData(string csvPath, string addItem, int column)
         {
             using (StreamReader sr = new StreamReader(csvPath, Encoding.Default, true))
             {
@@ -150,25 +150,24 @@ namespace RestSharpNetCoreTemplate.Helpers
                     result.AddRange(line.Split(';'));
 
                     result[column] = addItem;
-                    line = string.Join(",", line);
-
-
-                    }
                 }
-                File.WriteAllLines(@"C:\\CSV.txt", lines);
             }
-        }*/
-    
+        }
+
+
     }
 
-    static class Extensions
+}
+
+static class Extensions
+{
+    public static void ForEach<T>(this IEnumerable<T> ie, Action<T> action)
     {
-        public static void ForEach<T>(this IEnumerable<T> ie, Action<T> action)
+        foreach (var i in ie)
         {
-            foreach (var i in ie)
-            {
-                action(i);
-            }
+            action(i);
         }
     }
 }
+
+

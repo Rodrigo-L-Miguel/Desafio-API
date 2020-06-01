@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace RestSharpNetCoreTemplate.Tests.Projects
 {
-    [TestFixture]
+    [TestFixture,Order(1)]
     class AddProjectsTest : TestBase
     {
 
@@ -19,38 +19,93 @@ namespace RestSharpNetCoreTemplate.Tests.Projects
         #endregion
 
         [Test]
-        public void AdicionarNovoProjeto()
+        public void AdicionarProjeto()
         {
-            string requestService = "/api/rest/projects/";
-            string nomeProjeto = "Projeto Teste";
+            #region Parameters
+            string nomeProjeto = "Projeto Teste API";
             string descricaoProjeto = "Projeto de teste API";
             string respostaEsperada = "Created";
+            #endregion
 
-            AddProjectRequest AddProjeto = new AddProjectRequest(requestService);
+            AddProjectRequest AddProjeto = new AddProjectRequest();
             AddProjeto.SetJsonBody(nomeProjeto, descricaoProjeto);
             IRestResponse<dynamic> Resposta = AddProjeto.ExecuteRequest();
 
-            string codigoResposta = Resposta.StatusCode.ToString();
-            Assert.AreEqual(respostaEsperada, codigoResposta);
+            
+            Assert.AreEqual(respostaEsperada, Resposta.StatusCode.ToString());
+            Assert.IsTrue(Resposta.Content.Contains(nomeProjeto));
+            Assert.IsTrue(Resposta.Content.Contains(descricaoProjeto));
         }
-
-        [Test,TestCaseSource("CriarProjetoIProvider")]
-        public void AdicionarNovoProjetoIProvider(ArrayList testData)
+        [Test]
+        public void AdicionarProjetoRepetido()
         {
-            string requestService = "/api/rest/projects/";
+            #region Parameters
+            string nomeProjeto = "MyProject";
+            string descricaoProjeto = "Projeto de teste API";
+            string respostaEsperada = "InternalServerError";
+            #endregion
 
+            AddProjectRequest AddProjeto = new AddProjectRequest();
+            AddProjeto.SetJsonBody(nomeProjeto, descricaoProjeto);
+            IRestResponse<dynamic> Resposta = AddProjeto.ExecuteRequest();
+
+            Assert.AreEqual(respostaEsperada, Resposta.StatusCode.ToString());
+
+        }
+        [Test, TestCaseSource("CriarProjetoIProvider")]
+        public void AdicionarProjetoIProvider(ArrayList testData)
+        {
             #region Parameters
             string nomeProjeto = testData[0].ToString();
             string descricaoProjeto = testData[1].ToString();
             string respostaEsperada = "Created";
             #endregion
 
-            AddProjectRequest addProjeto = new AddProjectRequest(requestService);
+            AddProjectRequest addProjeto = new AddProjectRequest();
             addProjeto.SetJsonBody(nomeProjeto, descricaoProjeto);
-            IRestResponse<dynamic> resposta = addProjeto.ExecuteRequest();
+            IRestResponse<dynamic> Resposta = addProjeto.ExecuteRequest();
 
-            string codigoResposta = resposta.StatusCode.ToString();
-            Assert.AreEqual(respostaEsperada, codigoResposta);
+            Assert.AreEqual(respostaEsperada, Resposta.StatusCode.ToString());
+            Assert.IsTrue(Resposta.Content.Contains(nomeProjeto));
+            Assert.IsTrue(Resposta.Content.Contains(descricaoProjeto));
+        }
+        [Test]
+        public void AdicionarProjetoTokenIncorreto()
+        {
+            #region Parameters
+            string nomeProjeto = "Projeto Teste";
+            string descricaoProjeto = "Projeto de teste API";
+            string respostaEsperada = "Forbidden";
+            string descricaoErro = "API token not found";
+            string token = "1234";
+            #endregion
+
+            #region Actions
+            AddProjectRequest addProjeto = new AddProjectRequest();
+            addProjeto.SetJsonBody(nomeProjeto, descricaoProjeto);
+            addProjeto.UpdateToken(token);
+            IRestResponse<dynamic> Resposta = addProjeto.ExecuteRequest();
+            #endregion
+
+            Assert.AreEqual(Resposta.StatusCode.ToString(), respostaEsperada);
+            Assert.AreEqual(Resposta.StatusDescription, descricaoErro);
+        }
+        [Test]
+        public void AdicionarProjetoIncorreto()
+        {
+            #region Parameters
+            string nomeProjeto = null;
+            string descricaoProjeto = "Projeto de teste API";
+            string respostaEsperada = "Fatal error";
+            #endregion
+
+            #region Actions
+            AddProjectRequest addProjeto = new AddProjectRequest();
+            addProjeto.SetJsonBody(nomeProjeto, descricaoProjeto);
+            IRestResponse<dynamic> Resposta = addProjeto.ExecuteRequest();
+            #endregion
+
+            Assert.IsTrue(Resposta.Content.Contains(respostaEsperada));
         }
     }
 }
